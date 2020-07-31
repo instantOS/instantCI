@@ -2,6 +2,19 @@
 
 echo "importing functions"
 
+if ! ping -c 1 google.com; then
+    echo "no internet"
+    exit 1
+fi
+
+# change site prefix
+if [ -n "$INSTANTOSNAME" ]; then
+    echo "using INSTANTOSNAME $INSTANTOSNAME"
+else
+    INSTANTOSNAME="instantos"
+    echo "using default INSTANTOSNAME $INSTANTOSNAME"
+fi
+
 checkvar() {
     if [ -z "$1" ]; then
         echo "variable not found"
@@ -25,6 +38,14 @@ loginsurge() {
     } >~/.netrc
 }
 
+# database file has to exist
+checkdb() {
+    if ! [ -e ./instant.db ]; then
+        echo "cloning repo not successful"
+        exit 1
+    fi
+}
+
 # get a local copy of the repo
 mirrorrepo() {
     if ! curl -s instantos.surge.sh | grep -qi instantwm; then
@@ -34,11 +55,13 @@ mirrorrepo() {
     mkdir ~/instantmirror
     cd ~/instantmirror || exit 1
     wget -r -m -e robots=off 'http://packages.instantos.io'
-    mv ./*.sh/* ./
+    mv ./*/* ./
 
-    if ! [ -e ./instant.db ]; then
-        echo "cloning repo not successful"
-        exit 1
-    fi
+    checkdb
+}
 
+deploysurge() {
+    checkdb
+    surge . "$INSTANTOSNAME.surge.sh"
+    # todo: release site
 }
