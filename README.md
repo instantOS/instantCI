@@ -1,2 +1,11 @@
 # instantCI
-sync service for instantOS
+
+mirror sync service for instantOS
+
+Needed environment variables
+
+``` 
+SURGEMAIL
+SURGEPASS
+NETLIFY_AUTH_TOKEN
+```
