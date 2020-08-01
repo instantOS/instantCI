@@ -23,14 +23,27 @@ checkvar() {
 }
 
 loginnetlify() {
+    echo "checking netlify login"
+
     if ! netlify status | grep -i email; then
         echo "netlify login failed"
         exit 1
     fi
+
+    checkdb
+    mkdir .netlify
+
+    {
+        echo '{'
+        echo '        "siteId": "'"$NETLIFYID"'"'
+        echo '}'
+    } >.netlify/state.json
+
 }
 
 # apply surge settings
 loginsurge() {
+    echo "logging in surge"
     {
         echo 'machine surge.surge.sh'
         echo '    login '"$SURGEMAIL"
@@ -64,4 +77,23 @@ deploysurge() {
     checkdb
     surge . "$INSTANTOSNAME.surge.sh"
     # todo: release site
+}
+
+deploynetlify() {
+    checkdb
+    netlify deploy --prod --dir .
+}
+
+cleandir() {
+    if ! [ -e "$1" ]; then
+        return
+    else
+        echo "cleaning $1"
+        rm -rf "$1"
+    fi
+}
+
+cleanauth() {
+    echo "cleaning login files"
+    cleandir .netlify
 }

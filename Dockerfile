@@ -8,4 +8,4 @@ WORKDIR /home/user
 COPY start.sh start.sh
 COPY utils.sh utils.sh
 RUN chmod +x *.sh
-CMD "bash start.sh"
+CMD "start.sh"
