@@ -51,6 +51,11 @@ loginsurge() {
     } >~/.netrc
 }
 
+loginfirebase() {
+    cp ../firebase/firebase.json .
+    cp ../firebase/firebaserc ./.firebaserc
+}
+
 # database file has to exist
 checkdb() {
     if ! [ -e ./instant.db ]; then
@@ -89,16 +94,25 @@ deploynetlify() {
     netlify deploy --prod --dir .
 }
 
+deployfirebase() {
+    cleanauth
+    firebase deploy
+}
+
 cleandir() {
     if ! [ -e "$1" ]; then
         return
     else
         echo "cleaning $1"
-        rm -rf "$1"
+        rm -rf ./"$1"
     fi
 }
 
 cleanauth() {
     echo "cleaning login files"
     cleandir .netlify
+    cleandir .vercel
+    cleandir .firebase
+    cleandir .firebaserc
+    cleandir firebase*
 }
