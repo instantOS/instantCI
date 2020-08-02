@@ -3,6 +3,8 @@ FROM paperbenni/alpine
 RUN apk add nodejs npm bash expect wget
 RUN npm install surge -g
 RUN npm install netlify-cli -g
+RUN curl -sL https://firebase.tools | bash
+
 RUN mkdir -p /home/user
 WORKDIR /home/user
 COPY start.sh start.sh

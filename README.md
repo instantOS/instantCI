@@ -10,4 +10,5 @@ SURGEPASS # token found in netrc
 NETLIFY_AUTH_TOKEN # netlify authentification
 
 INSTANTOSNAME # site prefix
+FIREBASE_TOKEN # firenase login
 ```

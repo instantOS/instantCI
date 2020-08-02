@@ -69,13 +69,18 @@ mirrorrepo() {
     cd ~/instantmirror || exit 1
     wget -r -m -e robots=off 'http://packages.instantos.io'
     mv ./*/* ./
-
+    curl http://packages.instantos.io >index.html
     checkdb
 }
 
 deploysurge() {
     checkdb
     surge . "$INSTANTOSNAME.surge.sh"
+
+    if [ "$INSTANTOSNAME" = instantos ]; then
+        surge . repo.instantos.io
+    fi
+
     # todo: release site
 }
 
