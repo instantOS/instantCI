@@ -56,6 +56,24 @@ loginfirebase() {
     cp ../firebase/firebaserc ./.firebaserc
 }
 
+loginvercel() {
+    mkdir -p ~/.local/share/com.vercel.cli
+    pushd ~/.local/share/com.vercel.cli || exit 1
+
+    {
+        echo '{'
+        echo '  "_": "This is your Now credentials file. DO NOT SHARE! More: https://vercel.com/docs/configuration#global",'
+        echo '  "token": "'"$VERCELTOKEN"'"'
+        echo '}'
+    } >auth.json
+
+    popd || exit 1
+
+    mkdir .vercel || exit 1
+    cp ../vercel/project.json ./.vercel/project.json
+
+}
+
 # database file has to exist
 checkdb() {
     if ! [ -e ./instant.db ]; then
@@ -74,12 +92,16 @@ mirrorrepo() {
     cd ~/instantmirror || exit 1
     wget -r -m -e robots=off 'http://packages.instantos.io'
     mv ./*/* ./
-    curl http://packages.instantos.io >index.html
     checkdb
+}
+
+genindex() {
+    curl http://packages.instantos.io >index.html
 }
 
 deploysurge() {
     checkdb
+    genindex
     surge . "$INSTANTOSNAME.surge.sh"
 
     if [ "$INSTANTOSNAME" = instantos ]; then
@@ -91,12 +113,20 @@ deploysurge() {
 
 deploynetlify() {
     checkdb
+    genindex
     netlify deploy --prod --dir .
 }
 
 deployfirebase() {
     cleanauth
+    genindex
     firebase deploy
+}
+
+deployvercel() {
+    checkdb
+    cleanauth
+    vercel . --prod
 }
 
 cleandir() {
@@ -115,4 +145,5 @@ cleanauth() {
     cleandir .firebase
     cleandir .firebaserc
     cleandir firebase*
+    cleandir index.html
 }
