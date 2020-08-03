@@ -11,4 +11,5 @@ NETLIFY_AUTH_TOKEN # netlify authentification
 
 INSTANTOSNAME # site prefix
 FIREBASE_TOKEN # firenase login
+VERCELTOKEN # vercel login
 ```

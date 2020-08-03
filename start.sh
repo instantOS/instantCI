@@ -11,3 +11,6 @@ checkvar "$NETLIFYID"
 mirrorrepo
 loginsurge
 deploysurge
+
+loginvercel
+deployvercel

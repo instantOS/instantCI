@@ -52,11 +52,14 @@ loginsurge() {
 }
 
 loginfirebase() {
+    cleanauth
     cp ../firebase/firebase.json .
     cp ../firebase/firebaserc ./.firebaserc
 }
 
 loginvercel() {
+    echo "loggin in vercel"
+    cleanauth
     mkdir -p ~/.local/share/com.vercel.cli
     pushd ~/.local/share/com.vercel.cli || exit 1
 
@@ -68,7 +71,7 @@ loginvercel() {
     } >auth.json
 
     popd || exit 1
-
+    echo "creating project id"
     mkdir .vercel || exit 1
     cp ../vercel/project.json ./.vercel/project.json
 
@@ -118,14 +121,12 @@ deploynetlify() {
 }
 
 deployfirebase() {
-    cleanauth
     genindex
     firebase deploy
 }
 
 deployvercel() {
     checkdb
-    cleanauth
     vercel . --prod
 }
 
