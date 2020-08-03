@@ -13,4 +13,4 @@ COPY utils.sh utils.sh
 COPY firebase firebase
 COPY vercel vercel
 RUN chmod +x *.sh
-CMD "start.sh"
+CMD "/home/user/start.sh"

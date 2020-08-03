@@ -1,0 +1,16 @@
+sudo: required
+
+language: ruby
+
+services:
+  - docker
+
+branches:
+  only:
+    - master
+
+install:
+  - echo hello
+
+script:
+  - docker run --env SURGEMAIL="$SURGEMAIL" --env SURGEPASS="$SURGEPASS" --env INSTANTOSNAME=instantos --env NETLIFY_AUTH_TOKEN="$NETLIFY_AUTH_TOKEN" --env NETLIFYID="$NETLIFYID" --env FIREBASE_TOKEN="$FIREBASE_TOKEN" --env VERCELTOKEN="$VERCELTOKEN" paperbenni/instantci
