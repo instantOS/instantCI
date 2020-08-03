@@ -7,9 +7,12 @@ Needed environment variables
 ``` 
 SURGEMAIL # surge.sh account email
 SURGEPASS # token found in netrc
-NETLIFY_AUTH_TOKEN # netlify authentification
+INSTANTOSNAME # surge site prefix
 
-INSTANTOSNAME # site prefix
+NETLIFY_AUTH_TOKEN # netlify authentification
+NETLIFYID # id of site to deploy to
+
 FIREBASE_TOKEN # firenase login
+
 VERCELTOKEN # vercel login
 ```

@@ -1,5 +1,7 @@
 #!/usr/bin/expect
 
+# use in case project doesn't get detected automatically
+
 set timeout 20
 
 spawn vercel . --prod
