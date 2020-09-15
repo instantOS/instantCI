@@ -103,31 +103,35 @@ genindex() {
 }
 
 deploysurge() {
+    echo "deploying surge"
     checkdb
     genindex
     surge . "$INSTANTOSNAME.surge.sh"
 
     if [ "$INSTANTOSNAME" = instantos ]; then
-        surge . repo.instantos.io
+        surge . repo.instantos.io || echo "surge failed"
     fi
 
     # todo: release site
 }
 
 deploynetlify() {
+    echo "deploying netlify"
     checkdb
     genindex
-    netlify deploy --prod --dir .
+    netlify deploy --prod --dir . || echo "netlify failed"
 }
 
 deployfirebase() {
+    echo "deploying firebase"
     genindex
-    firebase deploy
+    firebase deploy || echo "firebase failed"
 }
 
 deployvercel() {
+    echo "deploying vercel"
     checkdb
-    vercel . --prod
+    vercel . --prod || echo "vercel failed"
 }
 
 cleandir() {
