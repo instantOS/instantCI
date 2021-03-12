@@ -106,7 +106,7 @@ deploysurge() {
     echo "deploying surge"
     checkdb
     genindex
-    surge . "$INSTANTOSNAME.surge.sh"
+    surge . "$INSTANTOSNAME.surge.sh" || echo "surge $INSTANTOSNAME.surge.sh failed"
 
     if [ "$INSTANTOSNAME" = instantos ]; then
         surge . repo.instantos.io || echo "surge failed"
@@ -131,6 +131,7 @@ deployfirebase() {
 deployvercel() {
     echo "deploying vercel"
     checkdb
+    genindex
     vercel . --prod || echo "vercel failed"
 }
 
