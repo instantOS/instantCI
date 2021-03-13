@@ -2,7 +2,8 @@ FROM paperbenni/alpine
 
 RUN apk add nodejs npm bash expect wget sudo
 RUN npm install surge -g
-RUN npm install netlify-cli -g
+RUN npm install netlify-cli
+RUN ln -s /node_modules/netlify-cli/bin/run /usr/bin/netlify
 RUN npm install firebase-tools -g
 RUN npm install vercel -g
 
