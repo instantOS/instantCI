@@ -4,8 +4,8 @@ echo "starting instantCI"
 
 source ./utils.sh || exit 1
 
-checkvar "$SURGEMAIL"
-checkvar "$SURGEPASS"
+checkvar "$SURGE_TOKEN"
+checkvar "$SURGE_LOGIN"
 
 checkvar "$NETLIFYID"
 checkvar "$NETLIFY_AUTH_TOKEN"
