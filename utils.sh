@@ -17,7 +17,7 @@ fi
 
 checkvar() {
     if [ -z "$1" ]; then
-        echo "variable not found"
+        echo "variable $2 not found"
         exit 1
     fi
 }

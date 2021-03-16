@@ -4,15 +4,15 @@ echo "starting instantCI"
 
 source ./utils.sh || exit 1
 
-checkvar "$SURGE_TOKEN"
-checkvar "$SURGE_LOGIN"
+checkvar "$SURGE_TOKEN" "surgetoken"
+checkvar "$SURGE_LOGIN" "surgelogin"
 
-checkvar "$NETLIFYID"
-checkvar "$NETLIFY_AUTH_TOKEN"
+checkvar "$NETLIFYID" "netlifyid"
+checkvar "$NETLIFY_AUTH_TOKEN" "netlifyauth"
 
-checkvar "$VERCELTOKEN"
+checkvar "$VERCELTOKEN" "verceltoken"
 
-checkvar "$FIREBASE_TOKEN"
+checkvar "$FIREBASE_TOKEN" "firebasetoken"
 
 
 # get a local copy of the repo
