@@ -43,6 +43,8 @@ loginnetlify() {
 
 # apply surge settings
 loginsurge() {
+    export SURGE_TOKEN="$SURGETOKEN"
+    export SURGE_LOGIN="$SURGELOGIN"
     echo "logging in surge"
     if ! surge list | grep -q instantos; then
         echo 'surge failed'
