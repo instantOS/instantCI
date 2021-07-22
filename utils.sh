@@ -87,6 +87,7 @@ checkdb() {
 }
 
 # get a local copy of the repo
+# this is the primary mirror which the others will be synced to
 mirrorrepo() {
     if ! curl -s packages.instantos.io | grep -qi instantwm; then
         echo "could not read mirror"
@@ -97,6 +98,21 @@ mirrorrepo() {
     wget -r -m -e robots=off 'http://packages.instantos.io'
     mv ./*/* ./
     checkdb
+    DBHASH="$(md5sum instant.db | grep -o '^[^ ]*')"
+    export DBHASH
+}
+
+checkhash() {
+    curl "$1"/instant.db >/tmp/tempdb.db
+
+    CHECKHASH="$(md5sum /tmp/tempdb.db | grep -o '^[^ ]*')"
+
+    if [ "$CHECKHASH" = "$DBHASH" ]; then
+        echo "repo $1 is already up to date, skipping"
+        return 1
+    else
+        return 0
+    fi
 }
 
 genindex() {
@@ -104,6 +120,7 @@ genindex() {
 }
 
 deploysurge() {
+    checkhash "http://$INSTANTOSNAME.surge.sh" || return 0
     echo "deploying surge"
     checkdb
     genindex
@@ -117,6 +134,7 @@ deploysurge() {
 }
 
 deploynetlify() {
+    checkhash "https://instantos.netlify.app" || return 0
     echo "deploying netlify"
     checkdb
     genindex
@@ -124,12 +142,14 @@ deploynetlify() {
 }
 
 deployfirebase() {
+    checkhash "https://instantos.web.app" || return 0
     echo "deploying firebase"
     genindex
     firebase deploy || echo "firebase failed"
 }
 
 deployvercel() {
+    checkhash "https://instantos.vercel.app"
     echo "deploying vercel"
     checkdb
     genindex

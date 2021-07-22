@@ -18,6 +18,7 @@ checkvar "$FIREBASE_TOKEN" "firebasetoken"
 # get a local copy of the repo
 mirrorrepo
 
+
 # instantos.surge.sh deployment
 loginsurge
 deploysurge
