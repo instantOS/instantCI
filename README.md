@@ -1,5 +1,6 @@
 # instantCI
 
+[![Build Status](https://travis-ci.org/instantOS/instantCI.svg?branch=master)](https://travis-ci.org/instantOS/instantCI)
 mirror sync service for instantOS
 
 Needed environment variables
