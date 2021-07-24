@@ -1,5 +1,6 @@
 FROM paperbenni/alpine
 
+WORKDIR /home/user
 RUN apk add nodejs npm bash expect wget sudo
 RUN npm install surge -g
 RUN npm install netlify-cli

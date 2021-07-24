@@ -2,7 +2,9 @@
 
 echo "importing functions"
 
-if ! ping -c 1 google.com; then
+if ! {
+    ping -c 1 google.com || curl -s cht.sh
+}; then
     echo "no internet"
     exit 1
 fi
