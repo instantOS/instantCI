@@ -33,4 +33,4 @@ jobs:
       - name: Run a multi-line script
         run: |
           docker run --env SURGETOKEN="$SURGETOKEN" --env SURGELOGIN="$SURGELOGIN" --env INSTANTOSNAME=instantos --env NETLIFY_AUTH_TOKEN="$NETLIFY_AUTH_TOKEN" --env NETLIFYID="$NETLIFYID" --env FIREBASE_TOKEN="$FIREBASE_TOKEN" --env VERCELTOKEN="$VERCELTOKEN" paperbenni/instantci
-          echo deployed
+          echo finished
