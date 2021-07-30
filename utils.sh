@@ -97,7 +97,7 @@ mirrorrepo() {
     fi
     mkdir ~/instantmirror
     cd ~/instantmirror || exit 1
-    wget -r -m -e robots=off 'http://packages.instantos.io'
+    wget -r -m -nv -e robots=off 'http://packages.instantos.io'
     mv ./*/* ./
     checkdb
     DBHASH="$(md5sum instant.db | grep -o '^[^ ]*')"
@@ -113,6 +113,7 @@ checkhash() {
         echo "repo $1 is already up to date, skipping"
         return 1
     else
+        echo "repo $1 needs updating, updating"
         return 0
     fi
 }
