@@ -95,6 +95,7 @@ mirrorrepo() {
         echo "could not read mirror"
         exit 1
     fi
+
     mkdir ~/instantmirror
     cd ~/instantmirror || exit 1
     wget -r -m -nv -e robots=off 'https://packages.instantos.io'
