@@ -91,13 +91,13 @@ checkdb() {
 # get a local copy of the repo
 # this is the primary mirror which the others will be synced to
 mirrorrepo() {
-    if ! curl -s packages.instantos.io | grep -qi instantwm; then
+    if ! curl -s https://packages.instantos.io | grep -qi instantwm; then
         echo "could not read mirror"
         exit 1
     fi
     mkdir ~/instantmirror
     cd ~/instantmirror || exit 1
-    wget -r -m -nv -e robots=off 'http://packages.instantos.io'
+    wget -r -m -nv -e robots=off 'https://packages.instantos.io'
     mv ./*/* ./
     checkdb
     DBHASH="$(md5sum instant.db | grep -o '^[^ ]*')"
@@ -119,7 +119,7 @@ checkhash() {
 }
 
 genindex() {
-    curl http://packages.instantos.io >index.html
+    curl https://packages.instantos.io >index.html
 }
 
 deploysurge() {
