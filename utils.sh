@@ -124,7 +124,7 @@ genindex() {
 }
 
 deploysurge() {
-    checkhash "http://$INSTANTOSNAME.surge.sh" || return 0
+    checkhash "https://$INSTANTOSNAME.surge.sh" || return 0
     echo "deploying surge"
     checkdb
     genindex
